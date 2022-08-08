@@ -3,6 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
+        - nvm use 16 
         - npm install -g jfrog-cli-v2-jf
         - jf config add --user ${JFROG_USER} --password ${JFROG_API_KEY} --artifactory-url ${JFROG_URL} --interactive=false
         - jf rt dl "sls-poc/laughing-waddle/-/laughing-waddle-${VERSION}.tgz"
@@ -11,6 +12,8 @@ frontend:
         - cd package && npm install
     build:
       commands:
+        - node -v
+        - nvm use 16
         - npm run build
   artifacts:
     baseDirectory: package/.next
