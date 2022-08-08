@@ -16,6 +16,7 @@ frontend:
         # - cp -a package/. .
         # - rm -rf package/
         # - ls -a
+        - cat amplify.sh
         - cat serverless.yml
         - npm install
     build:
