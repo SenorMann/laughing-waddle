@@ -3,21 +3,25 @@ frontend:
   phases:
     preBuild:
       commands:
+        - ls -a
+        - rm -rf *
         - nvm use 16 
         - npm install -g jfrog-cli-v2-jf
         - jf config add --user ${JFROG_USER} --password ${JFROG_API_KEY} --artifactory-url ${JFROG_URL} --interactive=false
         - jf rt dl "sls-poc/laughing-waddle/-/laughing-waddle-${VERSION}.tgz"
         - mv laughing-waddle/-/*.tgz .
         - tar zxvf *.tgz
-        - mv package/ src/
-        - cd src && npm install
+        - ls -a
+        - rm -rf *.tgz
+        - cp -a package/. .
+        - rm -rf package/
+        - ls -a
+        - npm install
     build:
       commands:
-        - node -v
-        - nvm use 16
         - npm run build
   artifacts:
-    baseDirectory: src/.next
+    baseDirectory: .next
     files:
       - '**/*'
   cache:
