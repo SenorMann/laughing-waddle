@@ -6,7 +6,7 @@ frontend:
         - npm install -g jfrog-cli-v2-jf
         - jf config add --user ${JFROG_USER} --password ${JFROG_API_KEY} --artifactory-url ${JFROG_URL} --interactive=false
         - jf rt dl "sls-poc/laughing-waddle/-/laughing-waddle-${VERSION}.tgz"
-        - mv poc-amplify/-/*.tgz .
+        - mv laughing-waddle/-/*.tgz .
         - tar zxvf *.tgz
         - cd package && npm install
     build:
