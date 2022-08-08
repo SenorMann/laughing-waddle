@@ -67,6 +67,8 @@ jobs:
           aws-region: eu-west-1
       
       - name: Set artefact Version
+        env:
+          AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
         run: |
           aws amplify update-app --app-id ${AMPLIFY_APP_ID} --environment-variables VERSION=${RELEASE_VERSION}
 
