@@ -70,9 +70,11 @@ jobs:
         env:
           AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
         run: |
-          aws amplify update-app --app-id ${AMPLIFY_APP_ID} --environment-variables VERSION=${RELEASE_VERSION}
+          aws amplify update-branch --app-id ${AMPLIFY_APP_ID} --branch-name main --environment-variables VERSION=${RELEASE_VERSION}
 
       - name: trigger webhook
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
         run: |
-          curl -X POST -d {} ${secrets.WEBHOOK_URL} -H "Content-Type:application/json"
+          curl -X POST -d {} ${WEBHOOK_URL} -H "Content-Type:application/json"
       
