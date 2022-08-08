@@ -6,24 +6,20 @@ frontend:
         # - ls -a
         # - rm -rf *
         - nvm use 16 
-        # - npm install -g jfrog-cli-v2-jf
-        # - jf config add --user ${JFROG_USER} --password ${JFROG_API_KEY} --artifactory-url ${JFROG_URL} --interactive=false
-        # - jf rt dl "sls-poc/laughing-waddle/-/laughing-waddle-${VERSION}.tgz"
-        # - mv laughing-waddle/-/*.tgz .
-        # - tar zxvf *.tgz
-        # - ls -a
-        # - rm -rf *.tgz
-        # - cp -a package/. .
-        # - rm -rf package/
-        # - ls -a
-        - cat amplify.sh
-        - cat serverless.yml
+        - npm install -g jfrog-cli-v2-jf
+        - jf config add --user ${JFROG_USER} --password ${JFROG_API_KEY} --artifactory-url ${JFROG_URL} --interactive=false
+        - jf rt dl "sls-poc/laughing-waddle/-/laughing-waddle-${VERSION}.tgz"
+        - mv laughing-waddle/-/*.tgz .
+        - tar zxvf *.tgz
+        - cp serverless.yml amplify.sh package/
+        - cd package
+        - ls -a
         - npm install
     build:
       commands:
         - npm run build
   artifacts:
-    baseDirectory: .next
+    baseDirectory: package/.next
     files:
       - '**/*'
   cache:
