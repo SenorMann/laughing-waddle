@@ -68,7 +68,7 @@ jobs:
       
       - name: Set artefact Version
         run: |
-          aws amplify update-app --environment-variables VERSION=${RELEASE_VERSION}
+          aws amplify update-app --app-id ${AMPLIFY_APP_ID} --environment-variables VERSION=${RELEASE_VERSION}
 
       - name: trigger webhook
         run: |
