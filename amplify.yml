@@ -6,7 +6,7 @@ frontend:
         - nvm use 16 
         - npm install -g jfrog-cli-v2-jf
         - jf config add --user ${JFROG_USER} --password ${JFROG_API_KEY} --artifactory-url ${JFROG_URL} --interactive=false
-        - jf rt dl "sls-poc/laughing-waddle/-/laughing-waddle-$0.0.13.tgz"
+        - jf rt dl "sls-poc/laughing-waddle/-/laughing-waddle-0.0.13.tgz"
         - mv laughing-waddle/-/*.tgz .
         - tar zxvf *.tgz
         - ls -a
