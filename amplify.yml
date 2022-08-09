@@ -11,6 +11,8 @@ frontend:
         - jf rt dl "sls-poc/laughing-waddle/-/laughing-waddle-${VERSION}.tgz"
         - mv laughing-waddle/-/*.tgz .
         - tar zxvf *.tgz
+        - cat serverless.yml
+        - cat amplify.sh
         - cp serverless.yml amplify.sh package/
         - cd package
         - ls -a
