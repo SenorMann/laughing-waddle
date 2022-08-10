@@ -10,7 +10,7 @@ frontend:
         - mv laughing-waddle/-/*.tgz .
         - tar zxvf *.tgz
         - ls -a
-        - cp serverless.yml amplify.sh package/
+        - cp serverless.yml package/
         - ls -a package/
         - cd package
         - npm install
