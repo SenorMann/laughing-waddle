@@ -70,7 +70,7 @@ jobs:
         env:
           AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
         run: |
-          aws amplify update-branch --app-id ${AMPLIFY_APP_ID} --branch-name main --environment-variables VERSION=${RELEASE_VERSION}
+          aws amplify update-branch --app-id ${AMPLIFY_APP_ID} --branch-name main --environment-variables USER_BRANCH=v0.0.14
 
       - name: trigger webhook
         env:
