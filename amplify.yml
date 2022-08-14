@@ -9,7 +9,9 @@ frontend:
         - mv laughing-waddle/-/*.tgz .
         - tar zxvf *.tgz
         - ls -a
+        - shopt -s extglob dotglob
         - rm -rf !(amplify.sh|serverless.yml|package)
+        - shopt -u extglob dotglob
         - cp -a package/. .
         - rm -r package/
         - ls -a
