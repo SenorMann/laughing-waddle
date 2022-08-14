@@ -5,20 +5,16 @@ frontend:
       commands:
         - npm install --location=global jfrog-cli-v2-jf
         - jf config add --user ${JFROG_USER} --password ${JFROG_API_KEY} --artifactory-url ${JFROG_URL} --interactive=false
-        - jf rt dl "sls-poc/laughing-waddle/-/laughing-waddle-0.0.13.tgz"
+        - jf rt dl "sls-poc/laughing-waddle/-/laughing-waddle-${VERSION}.tgz"
         - mv laughing-waddle/-/*.tgz .
         - tar zxvf *.tgz
-        - ls -a
-        - cp serverless.yml package/
-        - ls -a package/
-        - cd package
+        - cd package/
         - npm install
     build:
       commands:
         - npm run build
-        - cd ../
   artifacts:
-    baseDirectory: package/.next
+    baseDirectory: /package/.next
     files:
       - '**/*'
   cache:

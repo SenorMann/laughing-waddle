@@ -43,7 +43,9 @@ jobs:
       matrix:
         node: [16]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Use Node.js ${{ matrix.node }}
         uses: actions/setup-node@v2
@@ -69,8 +71,9 @@ jobs:
       - name: Set artefact Version
         env:
           AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
+          VERSION: $${ env.RELEASE_VERSION }
         run: |
-          aws amplify update-branch --app-id ${AMPLIFY_APP_ID} --branch-name main --environment-variables AWS_COMMIT_ID=v0.0.14
+          aws amplify update-branch --app-id ${AMPLIFY_APP_ID} --branch-name main --environment-variables VERSION=${VERSION}
 
       - name: trigger webhook
         env:
