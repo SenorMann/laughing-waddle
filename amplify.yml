@@ -1,8 +1,12 @@
 version: 1
+env:
+  variables:
+    _OUTDIR: deploy/.next
 frontend:
   phases:
     preBuild:
       commands:
+        - _CWD="$(pwd)"
         - npm install --location=global jfrog-cli-v2-jf
         - jf config add --user ${JFROG_USER} --password ${JFROG_API_KEY} --artifactory-url ${JFROG_URL} --interactive=false
         - jf rt dl "sls-poc/laughing-waddle/-/laughing-waddle-${VERSION}.tgz"
@@ -14,10 +18,19 @@ frontend:
     build:
       commands:
         - npm run build
+    postBuild:
+      commands:
+        - mkdir -p $_CWD/$_OUTDIR
+        - mv -v .next/* $_CWD/$_OUTDIR
+        - cd $_CWD
+        - shopt -s extglob dotglob
+        - rm -rf !(amplify.yml|deploy)
+        - shopt -u extglob dotglob
+        - ls -a
   artifacts:
-    baseDirectory: /package/.next
+    baseDirectory: /deploy/.next
     files:
       - '**/*'
   cache:
     paths:
-      - node_modules/**/*
+      - /deploy/.next/**/*
