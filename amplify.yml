@@ -8,6 +8,7 @@ frontend:
         - jf rt dl "sls-poc/laughing-waddle/-/laughing-waddle-${VERSION}.tgz"
         - mv laughing-waddle/-/*.tgz .
         - tar zxvf *.tgz
+        - cp serverless.yml package/
         - cd package/
         - npm install
     build:
