@@ -71,7 +71,7 @@ jobs:
       - name: Set artefact Version
         env:
           AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
-          VERSION: $${ env.RELEASE_VERSION }
+          VERSION: ${{ env.RELEASE_VERSION }}
         run: |
           aws amplify update-branch --app-id ${AMPLIFY_APP_ID} --branch-name main --environment-variables VERSION=${VERSION}
 
