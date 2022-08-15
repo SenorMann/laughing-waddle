@@ -13,7 +13,9 @@ frontend:
         # - rm -rf !(amplify.sh|package|serverless.yml|.serverless)
         # - shopt -u extglob dotglob
         # Delete all files related to the git repo
-        - git rm . -r
+        - git status
+        - cat amplify.yml
+        - git rm . -rf
         - cp -a package/. .
         - rm -r package/
         - ls -a
