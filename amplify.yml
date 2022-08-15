@@ -8,9 +8,9 @@ frontend:
         - jf rt dl "sls-poc/laughing-waddle/-/laughing-waddle-${VERSION}.tgz"
         - mv laughing-waddle/-/*.tgz .
         - tar zxvf *.tgz
-        - ls -a
+        - git ls-files
         - shopt -s extglob dotglob
-        - rm -rf !(amplify.sh|serverless.yml|package)
+        - rm -rf !(amplify.sh|package|serverless.yml|.serverless)
         - shopt -u extglob dotglob
         - cp -a package/. .
         - rm -r package/
