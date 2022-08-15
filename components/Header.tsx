@@ -6,7 +6,7 @@ export default function Header() {
           textAlign: "center",
         }}
         >
-        Country Data
+        Countries
       </h1>
     </header>
   )
